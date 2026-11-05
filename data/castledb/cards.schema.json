@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pokemon-tcg-gbc-recomp/schema/cards.json",
+  "title": "Pokémon TCG card data (translation-layer format)",
+  "description": "The compiler input produced by tools/extract_cards.py and consumed by tools/compile_cards.py. Field values keep RGBDS symbols for named constants and integers for literal numbers.",
+  "type": "object",
+  "required": ["schema", "version", "count", "cards"],
+  "properties": {
+    "schema": { "const": "poketcg.cards" },
+    "version": { "type": "integer" },
+    "count": { "type": "integer" },
+    "cards": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/card" }
+    }
+  },
+  "$defs": {
+    "energy": {
+      "type": "object",
+      "required": ["type", "amount"],
+      "properties": {
+        "type": { "type": "string" },
+        "amount": { "type": "integer" }
+      }
+    },
+    "card": {
+      "type": "object",
+      "required": ["symbol", "card_type", "type", "gfx", "name", "rarity", "set", "id"],
+      "properties": {
+        "symbol": { "type": "string", "description": "Assembly label, e.g. 'ExampleCard'" },
+        "card_type": { "enum": ["pokemon", "trainer", "energy"] },
+        "type": { "type": "string", "description": "TYPE_* constant" },
+        "gfx": { "type": "string", "description": "Card graphic pointer" },
+        "name": { "type": "string", "description": "Card name text pointer" },
+        "rarity": { "type": "string", "description": "CIRCLE / DIAMOND / STAR / PROMOSTAR" },
+        "set": { "type": "array", "items": { "type": "string" }, "description": "Card set bitmask symbols" },
+        "id": { "type": "integer", "description": "Numeric card ID (CardPointers index)" },
+        "id_symbol": { "type": "string", "description": "Original CARD_DATA_ID constant, e.g. 'EXAMPLE_CARD'" },
+
+        "hp": { "type": "integer" },
+        "stage": { "type": "string" },
+        "pre_evo_name": { "type": "string" },
+        "retreat_cost": { "type": "integer" },
+        "weakness": { "type": "string" },
+        "resistance": { "type": "string" },
+        "category": { "type": "string" },
+        "pokedex_number": { "type": "integer" },
+        "level": { "type": "integer" },
+        "length": { "type": "array", "items": { "type": "integer" } },
+        "weight": { "type": "integer" },
+        "description": { "type": "string" },
+        "ai_info": { "type": "string" },
+
+        "effect_commands": { "type": "string" },
+        "description_cont": { "type": "string" }
+      },
+      "patternProperties": {
+        "^(attack1|attack2)_energy$": { "type": "array", "items": { "$ref": "#/$defs/energy" } },
+        "^(attack1|attack2)_(name|description|description_cont|category|effect_commands|flag1|flag2|flag3|effect_param|animation)$": { "type": "string" },
+        "^(attack1|attack2)_damage$": { "type": "integer" }
+      },
+      "additionalProperties": true
+    }
+  }
+}

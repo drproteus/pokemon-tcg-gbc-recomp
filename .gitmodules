@@ -1,0 +1,6 @@
+[submodule "vendor/poketcg"]
+	path = vendor/poketcg
+	url = https://github.com/pret/poketcg.git
+[submodule "vendor/gb-recompiled"]
+	path = vendor/gb-recompiled
+	url = https://github.com/arcanite24/gb-recompiled.git

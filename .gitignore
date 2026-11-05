@@ -1,0 +1,38 @@
+# Build artifacts
+/build/
+*.o
+*.gbc
+*.gb
+*.sym
+*.map
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# Editor/OS
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# ROMs (never commit)
+*.gbc
+*.gb
+*.bin
+!vendor/**/*.bin
+
+# Generated card data — derived at extract time from the user's own copy of
+# the game (the pret disassembly / their ROM). Never commit.
+data/castledb/cards.json
+data/castledb/cards.cdb
+data/castledb/cards.csv
+data/castledb/*.csv
+
+# ImGui runtime artifact
+imgui.ini

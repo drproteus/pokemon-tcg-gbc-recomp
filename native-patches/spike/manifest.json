@@ -1,0 +1,18 @@
+{
+  "schema": "gbrecomp.native-patch",
+  "version": 1,
+  "patch_id": "org.poketcg-recomp.spike",
+  "rom": {
+    "sha256": "a54515bb6b3e364964d3c0226f5a6b0c8c0f7318c9296ef2e321df0bbb8541ce",
+    "size": 1048576
+  },
+  "sources": ["spike_patch.c"],
+  "bindings": [
+    {
+      "function": "gbfn:v1:0000:0264",
+      "pre": "spike_pre",
+      "replace": "spike_replace",
+      "post": "spike_post"
+    }
+  ]
+}
